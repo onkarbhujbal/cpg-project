@@ -39,13 +39,9 @@ jobs:
         run: |
           echo 'Running Tests...'
           ls -la
-          sudo cp -rf ./webapp/target/webapp /tmp/myefs/docker_volume/
-          sudo docker run -itd --network=my_network --name webserver300${{ github.run_id }} -p 300${{ github.run_id }}:80 myweb:2.0
-          sudo docker ps
-          curl -kv http://3.139.57.248:300${{ github.run_id }}/index_dev.jsp
-          elinks http://3.139.57.248:300${{ github.run_id }}/index.html
-          elinks http://3.139.57.248:300${{ github.run_id }}/index.php
-
+          docker ps
+          sudo docker run -d -p 80:80 myweb:2.0
+          
       - name: Deployment
         run: |
           echo 'Deployment..'
