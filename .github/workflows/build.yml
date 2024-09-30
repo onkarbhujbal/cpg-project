@@ -41,6 +41,16 @@ jobs:
           ls -la
           docker ps
           sudo docker run -d -p 80:80 myweb:2.0
+
+      - name: Check if application runs
+        run: |
+          response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080/docker-war-demo/index.html)
+          if [ "$response" -ne 200 ]; then
+            echo "Index.html is not loading! HTTP status code: $response"
+            exit 1
+          else
+            echo "Index.html is loading successfully! HTTP status code: $response"
+          fi
           
       - name: Deployment
         run: |
