@@ -24,7 +24,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd ${{ github.workspace }}/webapp/pom.xml
+          cd ${{ github.workspace }}/webapp/
           ls -al
           mvn clean install
 
