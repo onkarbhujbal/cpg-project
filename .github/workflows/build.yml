@@ -30,6 +30,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
+          ls -al
           echo "Building Docker image..."
           sudo docker build -t myweb:2.0 .
 
