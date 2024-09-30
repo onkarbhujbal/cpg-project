@@ -39,17 +39,21 @@ jobs:
         run: |
           echo "Public IP Address:"
           curl ifconfig.me
+          public_ip=$(curl -s ifconfig.me)
+          echo "PUBLIC_IP=$public_ip" >> $GITHUB_ENV
 
       - name: Testing
         run: |
           echo 'Running Tests...'
           ls -la
           docker ps
-          sudo docker run -d -p 8080:8080 myweb:2.0
+          sudo docker run -d --name myweb-container -p 8080:8080 myweb:2.0
           sleep 20  # Wait for the server to start
           docker ps
-          ls -al  /usr/local/tomcat/webapps/
-          curl http://localhost:8080/docker-war-demo/index.html
+          docker exec myweb-container ls -la /usr/local/tomcat/webapps/
+          echo "Accessing service at http://$PUBLIC_IP:8080"
+          curl http://$PUBLIC_IP:8080/docker-war-demo/index.html
+          sleep 20
 
           
       - name: Deployment
