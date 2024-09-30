@@ -52,11 +52,12 @@ jobs:
           docker ps
           docker exec myweb-container ls -la /usr/local/tomcat/webapps/
           docker logs myweb-container
+          sudo ufw enable
           sudo ufw allow 8080/tcp
           sudo ufw status
           docker inspect myweb-container
-          echo "Accessing service at http://$PUBLIC_IP:8080"
-          curl http://$PUBLIC_IP:8080/docker-war-demo/index.html
+          echo "Accessing service at http://localhost:8080/docker-war-demo"
+          curl http://localhost:8080/docker-war-demo
           sleep 20
 
           
