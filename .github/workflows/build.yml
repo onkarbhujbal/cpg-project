@@ -57,12 +57,13 @@ jobs:
           sudo ufw status
           docker inspect myweb-container
           echo "Accessing service at http://localhost:8080/docker-war-demo"
-          http://$PUBLIC_IP:8080/docker-war-demo
+          #http://$PUBLIC_IP:8080/docker-war-demo
           curl http://localhost:8080/docker-war-demo
           sleep 20
 
           
-      - name: Deployment
+      - name: Create Tag and push to DockerHub
         run: |
           echo 'Deployment..'
-          # Add your deployment commands here
+          docker tag myweb:2.0 onkarbhujbal2556/myweb:latest
+          docker push onkarbhujbal2556/myweb:2.0
