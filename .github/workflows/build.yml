@@ -66,4 +66,4 @@ jobs:
         run: |
           echo 'Deployment..'
           docker tag myweb:2.0 onkarbhujbal2556/myweb:latest
-          docker push onkarbhujbal2556/myweb:2.0
+          docker push onkarbhujbal2556/myweb:latest
